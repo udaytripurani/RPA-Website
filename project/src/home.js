@@ -7,6 +7,8 @@ function Home() {
      
       <div id="container">
         <h1><center>RPA- ROBOTIC PROCESS AUTOMATION</center></h1>
+        </div>
+        <div>
         <h3>WHY RPA?</h3>
         <p>
           Usually, everyone is curious to get their process done so easily without human interference which saves them time

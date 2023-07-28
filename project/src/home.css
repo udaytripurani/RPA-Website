@@ -2,7 +2,7 @@ body {
     font-family: cursive;
     font-size:large;
     background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
-    color: #333; /* Dark text color */
+    color: #3cbce7;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -24,10 +24,10 @@ body {
   
   h1 {
   border-style: dashed;
-    color: #04223b; /* Darker Blue header text */
+    color: #d1e7f8; /* Darker Blue header text */
   }
   
   p {
-    color: #000080; /* Dark Blue text */
+    color: #f1f1f9; /* Dark Blue text */
   }
   
