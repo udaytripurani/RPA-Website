@@ -1,0 +1,117 @@
+/* ... Other CSS styles ... */
+
+.button-50 {
+    appearance: button;
+    background-color: #3636f9;
+    background-image: none;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: #fff 4px 4px 0 0, #000 4px 4px 0 1px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Gotham", sans-serif; /* Use the "Gotham" font family */
+    font-size: 16px; /* Increase the font size to match the other components */
+    font-weight: 700; /* Use bold font weight to match the other components */
+    line-height: 24px; /* Increase the line height to match the other components */
+    padding: 12px 24px; /* Adjust the padding to match the spacing of other components */
+    text-align: center;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  
+  .button-50:focus {
+    text-decoration: none;
+  }
+  
+  .button-50:hover {
+    text-decoration: none;
+  }
+  
+  .button-50:active {
+    box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+    outline: 0;
+  }
+  
+  .button-50:not([disabled]):active {
+    box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+    transform: translate(2px, 2px);
+  }
+  
+  /* Apply specific styles to the login button */
+  .login-button {
+    /* Add any additional styles specific to the login button here */
+  }
+  
+  .navbar {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+ 
+    padding: 20px 60px; /* Padding to control the spacing around the elements in the navbar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    flex-grow: 1; /* Allow the logo to expand and take available space */
+    text-align: left; /* Adjust the logo's alignment within the navbar */
+    margin: 0; /* Remove the margin around the logo */
+  }
+  
+  .logo img {
+    height: 70px; /* Increase the height of your logo as needed */
+  }
+  
+  .navbar-components {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-right: 50px ;
+  }
+  
+  .navbar-components li {
+    margin-left: 45px;
+     /* Increase or decrease the margin to adjust the spacing */
+  }
+  
+  .navbar-components a {
+    text-decoration: none;
+    color: #000000; /* Black color for the text */
+    font-size: 18px; /* Increase the font size of the elements as needed */
+    font-family: "Gotham", sans-serif; /* Use the "Gotham" font family */
+    text-transform: uppercase; /* Convert the text to all capitals */
+    font-weight: bold; /* Add bold font weight */
+    position: relative;
+  }
+  
+  .navbar-components a:hover {
+    text-decoration: none;
+  }
+  
+  .navbar-components a:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Adjust the underline position as needed */
+    width: 100%;
+    height: 2px;
+    background-color: #0000ff; /* Blue color for the underline */
+  }
+  
+  @media (min-width: 768px) {
+    .button-50 {
+      padding: 14px 30px; /* Adjust padding for larger screens */
+      font-size: 18px; /* Increase font size for larger screens */
+      line-height: 26px; /* Increase line height for larger screens */
+    }
+  }
+  
+  /* ... Other CSS styles ... */
+  
