@@ -52,7 +52,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 70px;
+    height: 87px;
  
     padding: 20px 60px; /* Padding to control the spacing around the elements in the navbar */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -77,14 +77,14 @@
   }
   
   .navbar-components li {
-    margin-left: 45px;
+    margin-left: 55px;
      /* Increase or decrease the margin to adjust the spacing */
   }
   
   .navbar-components a {
     text-decoration: none;
     color: #000000; /* Black color for the text */
-    font-size: 18px; /* Increase the font size of the elements as needed */
+    font-size: 21px; /* Increase the font size of the elements as needed */
     font-family: "Gotham", sans-serif; /* Use the "Gotham" font family */
     text-transform: uppercase; /* Convert the text to all capitals */
     font-weight: bold; /* Add bold font weight */
