@@ -1,14 +1,19 @@
 import React from 'react';
 import './nav.css';
+
 const Nav = () => {
+  const redirectToUrl = (url) => {
+    window.location.href = url;
+  };
+
   return (
     <nav className="navbar">
-      <div className="logo">
-        <img src={"./logo.png"} />
+      <div className="logo" onClick={() => redirectToUrl("/")}>
+        <img src={"./logo.png"} alt="Logo" />
       </div>
       <ul className="navbar-components">
         <li>
-          <a href="#">EVENTS</a>
+          <a href="events">EVENTS</a>
         </li>
         <li>
           <a href="#">BLOGS</a>

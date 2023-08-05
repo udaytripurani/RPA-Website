@@ -1,4 +1,5 @@
-body {
+
+.home {
     font-family: cursive;
     font-size:large;
     background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
@@ -9,7 +10,7 @@ body {
   }
  
   
-  #header {
+  .home #header {
     background-color: #4682B4; /* Darker Blue header */
     color: #fff; /* White text color */
     text-align: center;
@@ -22,12 +23,11 @@ body {
     padding: 20px;
   }
   
-  h1 {
+  .home h1 {
   border-style: dashed;
     color: #d1e7f8; /* Darker Blue header text */
   }
   
-  p {
+  .home p {
     color: #f1f1f9; /* Dark Blue text */
   }
-  

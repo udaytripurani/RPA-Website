@@ -1,0 +1,97 @@
+/* EventsComponent.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Gotham:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Georgia&display=swap');
+
+.eventsComponent {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.eventsComponent h1, .eventsComponent h2 {
+  font-family: "Gotham", sans-serif;
+  text-decoration: underline;
+  text-decoration-color: #0000ff;
+}
+
+.eventsComponent p {
+  font-family: "Georgia", serif;
+}
+
+.eventsComponent .container {
+  padding: 20px;
+}
+
+.eventsComponent .events-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.eventsComponent .event-box {
+  display: flex;
+  width: 1000px; /* Change width to an appropriate value in pixels */
+  max-width: 1000px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #fff;
+  height: 190px;
+}
+
+.eventsComponent .event-box img {
+  max-width: 120px;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.eventsComponent .event-box img:hover {
+  transform: scale(1.8);
+}
+
+.eventsComponent .event-details {
+  flex: 1;
+}
+
+.eventsComponent .event-details h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.eventsComponent .event-details p {
+  margin-top: 5px;
+}
+
+.eventsComponent .event-status {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.eventsComponent .event-status a, .eventsComponent .event-status span {
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.eventsComponent .event-status a {
+  background-color: #007bff;
+  /* Adjust the margin-left if needed */
+  margin-left: 675px;
+}
+
+.eventsComponent .event-status span {
+  background-color: #28a745;
+  /* Adjust the margin-left if needed */
+  margin-left: 675px;
+}
+
+.eventsComponent .event-box.completed {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
