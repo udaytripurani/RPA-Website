@@ -1,5 +1,5 @@
 import React from 'react';
-
+import event1 from './images/event1.jpg';
 const RpaBlog = () => {
   const blogStyle = {
     backgroundColor: '#f2f2f2',
@@ -24,6 +24,8 @@ const RpaBlog = () => {
   };
 
   const cardStyle = {
+    width: '800px',
+    height:'650px',
     border: '1px solid #ccc',
     borderRadius: '5px',
     overflow: 'hidden',
@@ -34,9 +36,11 @@ const RpaBlog = () => {
   };
 
   const cardImgStyle = {
-    maxWidth: '100%',
-    height: 'auto',
+    width: '100%', /* The image will take the full width of its container */
+    height: '400px', /* Set the fixed height for the image */
+    objectFit: 'contain', /* Maintain aspect ratio and fit the image inside the container */
   };
+  
 
   const cardContentStyle = {
     padding: '1rem',
@@ -110,7 +114,7 @@ const RpaBlog = () => {
         <div style={cardStyle}>
           <img
             style={cardImgStyle}
-            src={blogData1.imageUrl}
+            src={event1}
             alt="Sample Image"
           />
           <div style={cardContentStyle}>
