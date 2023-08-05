@@ -1,6 +1,6 @@
 /* ... Other CSS styles ... */
 
-.button-50 {
+.nav .button-50 {
     appearance: button;
     background-color: #3636f9;
     background-image: none;
@@ -24,7 +24,7 @@
     white-space: nowrap;
   }
   
-  .button-50:focus {
+  .nav .button-50:focus {
     text-decoration: none;
   }
   

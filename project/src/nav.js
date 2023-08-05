@@ -7,6 +7,7 @@ const Nav = () => {
   };
 
   return (
+    <div className="nav">
     <nav className="navbar">
       <div className="logo" onClick={() => redirectToUrl("/")}>
         <img src={"./logo.png"} alt="Logo" />
@@ -16,7 +17,7 @@ const Nav = () => {
           <a href="events">EVENTS</a>
         </li>
         <li>
-          <a href="#">BLOGS</a>
+          <a href="/blog">BLOGS</a>
         </li>
         <li>
           <a href="#">GALLERY</a>
@@ -29,6 +30,7 @@ const Nav = () => {
         LOGIN
       </button>
     </nav>
+    </div>
   );
 };
 
