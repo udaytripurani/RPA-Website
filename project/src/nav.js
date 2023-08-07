@@ -1,11 +1,11 @@
 import React from 'react';
 import './nav.css';
-
+import { Link, useNavigate } from 'react-router-dom';
 const Nav = () => {
   const redirectToUrl = (url) => {
     window.location.href = url;
   };
-
+  const navigate = useNavigate();
   return (
     <div className="nav">
     <nav className="navbar">
@@ -26,9 +26,14 @@ const Nav = () => {
           <a href="#">OUR TEAM</a>
         </li>
       </ul>
-      <button className="button-50 login-button" role="button">
-        LOGIN
-      </button>
+      <button
+          className="button-50 login-button"
+          role="button"
+          onClick={() => navigate('/login')}
+        >
+          LOGIN
+        </button>
+
     </nav>
     </div>
   );
