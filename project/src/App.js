@@ -7,7 +7,8 @@ import RpaBlog from './RpaBlog';
 import Login from './login';
 import SignUp from './SignUp';
 import UserDetails from './UserDetails';
-
+import CreateEventForm from './CreateEventForm';
+import ImageUpload from './imageUpload.';
 function App() {
   const isLoggedIn = window.localStorage.getItem('loggedIn');
 
@@ -32,7 +33,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/userDetails" element={<UserDetails />} />
-          <Route path="/logged-out" element={<Login />} />
+          <Route path="/image" element={<ImageUpload />} />
+          <Route path="/CreateEventForm" element={<CreateEventForm />} />
         </Routes>
       </div>
     </Router>
