@@ -9,38 +9,104 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
  // Add this line
  app.use(express.json({ limit: '10mb' }))
-
+const path = require("path");
 const jwt = require("jsonwebtoken");
 var nodemailer = require("nodemailer");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
 
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" }).single("posterImage");
+
 
 
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-const mongoUrl =
-  "mongodb+srv://uday:uday2acc@cluster0.0vtstih.mongodb.net/?retryWrites=true&w=majority";
+
+
+  const multer = require("multer");
+
+
+ 
+  const mongoUrl = "mongodb://127.0.0.1:27017/local"; // Update with your local database URL
   
-mongoose
-  .connect(mongoUrl, {
-    useNewUrlParser: true,
-  })
-  .then(() => {
-    console.log("Connected to database");
-  })
-  .catch((e) => console.log(e));
+  mongoose
+    .connect(mongoUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("Connected to local database");
+    })
+    .catch((e) => console.log(e));
+  const ImageDetailsSchema = new mongoose.Schema(
+    {
+      title: String,
+      description: String,
+      venue: String,
+      date: String,
+      image: String,
+    },
+    {
+      collection: "ImageDetails",
+    }
+  );
+  
+  const Event = mongoose.model("ImageDetails", ImageDetailsSchema);
+  
+  var storage = multer.diskStorage({
+    destination: "./public/images",
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + "-" + file.originalname);
+    },
+  });
+  
+  var upload = multer({ storage: storage }).single("file");
+  
+  app.post("/upload-event", (req, res) => {
+    upload(req, res, async function (err) {
+      if (err instanceof multer.MulterError) {
+        return res.status(500).json(err);
+      } else if (err) {
+        return res.status(500).json(err);
+      }
+  
+      const { title, description, venue, date } = req.body;
+      const imagePath = req.file ? req.file.filename : null;
+  
+      try {
+        await Event.create({
+          title,
+          description,
+          venue,
+          date,
+          image: imagePath,
+        });
+  
+        res.send({ Status: "ok" });
+      } catch (error) {
+        res.send({ Status: "error", data: error });
+      }
+    });
+  });
+  
+  app.use(express.static("./public"));
+
+  app.get("/get-events", async (req, res) => {
+  try {
+    const events = await Event.find();
+    res.status(200).json(events);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 require("./userDetails");
 require("./eventSchema");
-require("./imageDetails");
 
-const Images = mongoose.model("ImageDetails");
+
+
 const User = mongoose.model("UserInfo");
-const Event = mongoose.model("EventDetails");
+
 app.post("/register", async (req, res) => {
   const { fname, lname, email, password, userType } = req.body;
 
@@ -85,17 +151,8 @@ app.post("/login-user", async (req, res) => {
   res.json({ status: "error", error: "InvAlid Password" });
 });
 
-app.post("/upload-image", async (req, res) => {
-  const { title,description,venue,date,base64 } = req.body;
-  try {
-    await Images.create({ title,description,venue,date,image: base64 });
-    res.send({ Status: "ok" })
 
-  } catch (error) {
-    res.send({ Status: "error", data: error });
 
-  }
-})
 
 
 
@@ -151,46 +208,130 @@ app.post("/deleteUser", async (req, res) => {
 });
 
 
-app.post("/upload-event1", async (req, res) => {
-  try {
-    const { title, description, venue, date } = req.body;
-    const event = new Event({ title, description, venue, date });
-    
-    // Assuming you have a field named 'posterImage' in your form
-    // Multer middleware handles file uploads
-    const upload = multer({ dest: "uploads/" }).single("posterImage");
-    
-    upload(req, res, async (err) => {
-      if (err) {
-        console.error("Error uploading image:", err);
-        return res.status(500).json({ error: "Image upload failed" });
-      }
-      
-      event.posterImage = req.file ? req.file.filename : null;
-      
-      await event.save();
-      return res.json({ status: "ok" });
-    });
-  } catch (error) {
-    console.error("Error creating event:", error);
-    res.status(500).json({ error: "Event creation failed" });
-  }
-});
 
 
-app.post("/upload-event", async (req, res) => {
-  const { title,description,venue,date, base64 } = req.body;
-  try {
-    await Event.create({ 
-      title,
-      description,
-      venue,
-      date,
-      posterImage: base64 });
-    res.send({ Status: "ok" })
+// app.post("/upload-event", async (req, res) => {
+//   const { title,description,venue,date, base64 } = req.body;
+//   try {
+//     await Event.create({ 
+//       title,
+//       description,
+//       venue,
+//       date,
+//       posterImage: base64 });
+//     res.send({ Status: "ok" })
 
-  } catch (error) {
-    res.send({ Status: "error", data: error });
+//   } catch (error) {
+//     res.send({ Status: "error", data: error });
 
-  }
-})
+//   }
+// })
+
+// app.use(express.static("./public"));
+
+
+// var storage = multer.diskStorage({
+
+// destination: "./public/images",
+// filename: function (req, file, cb) {
+// cb(null, Date.now() + '-' +file.originalname )
+// }
+// })
+
+
+
+// var upload = multer({ storage: storage }).array('file');
+
+
+// app.post('/upload',function(req, res) {
+ 
+// upload(req, res, function (err) {
+//        if (err instanceof multer.MulterError) {
+//            return res.status(500).json(err)
+//        } else if (err) {
+//            return res.status(500).json(err)
+//        }
+//   return res.status(200).send(req.file)
+
+// })
+
+// });
+////testing from here 
+
+
+
+// const express = require("express");
+// const mongoose = require("mongoose");
+// const multer = require("multer");
+// const cors = require("cors");
+// const app = express();
+// app.use(express.json());
+// app.use(cors());
+// const mongoUrl = "mongodb://127.0.0.1:27017/local"; // Update with your local database URL
+
+// mongoose
+//   .connect(mongoUrl, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("Connected to local database");
+//   })
+//   .catch((e) => console.log(e));
+// const ImageDetailsSchema = new mongoose.Schema(
+//   {
+//     title: String,
+//     description: String,
+//     venue: String,
+//     date: String,
+//     image: String,
+//   },
+//   {
+//     collection: "ImageDetails",
+//   }
+// );
+
+// const Event = mongoose.model("ImageDetails", ImageDetailsSchema);
+
+// var storage = multer.diskStorage({
+//   destination: "./public/images",
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + "-" + file.originalname);
+//   },
+// });
+
+// var upload = multer({ storage: storage }).single("file");
+
+// app.post("/upload-event", (req, res) => {
+//   upload(req, res, async function (err) {
+//     if (err instanceof multer.MulterError) {
+//       return res.status(500).json(err);
+//     } else if (err) {
+//       return res.status(500).json(err);
+//     }
+
+//     const { title, description, venue, date } = req.body;
+//     const imagePath = req.file ? req.file.filename : null;
+
+//     try {
+//       await Event.create({
+//         title,
+//         description,
+//         venue,
+//         date,
+//         image: imagePath,
+//       });
+
+//       res.send({ Status: "ok" });
+//     } catch (error) {
+//       res.send({ Status: "error", data: error });
+//     }
+//   });
+// });
+
+// app.use(express.static("./public"));
+
+// const PORT = 5000;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });

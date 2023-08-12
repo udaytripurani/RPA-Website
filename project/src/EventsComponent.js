@@ -1,45 +1,81 @@
-import React from 'react';
-// Import CSS module
+import React, { useState, useEffect } from 'react';
 import './EventsComponent.css';
-import event1 from './images/event1.jpg';
-import event2 from './images/event2.png';
-
+import { useNavigate } from 'react-router-dom';
+import  eventIcon  from 'C:/Users/Uday/Desktop/RPA/TESTS/project/src/images/icons8-event-48.png';
 const EventsComponent = () => {
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: 'Event 1 Title',
-      description: 'Description of Event 1 goes here.',
-      venue: 'Event 1 Venue',
-      date: 'Event 1 Date',
-      image: event1,
-    },
-    // Add more upcoming events here
-  ];
-
-  const completedEvents = [
-    {
-      id: 2,
-      title: 'Event 2 Title',
-      description: 'Description of Event 2 goes here.',
-      venue: 'Event 2 Venue',
-      date: 'Event 2 Date',
-      image: event2,
-    },
-    // Add more completed events here
-  ];
+  const [events, setEvents] = useState({ upcoming: [], completed: [] });
+  const isLoggedIn = window.localStorage.getItem("loggedIn");
+  const navigate = useNavigate();
+  useEffect(() => {
+    fetch('http://localhost:5000/get-events')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const currentDate = new Date();
+        const upcomingEvents = [];
+        const completedEvents = [];
+  
+        data.forEach((event) => {
+          const eventDate = new Date(event.date);
+  
+          if (eventDate > currentDate) {
+            upcomingEvents.push(event);
+          } else {
+            completedEvents.push(event);
+          }
+        });
+  
+        setEvents({ upcoming: upcomingEvents, completed: completedEvents });
+      })
+      .catch((error) => {
+        console.error('Error fetching events:', error);
+      });
+  }, []);
+  
 
   return (
     <div className="eventsComponent">
+      
       <div className="container">
         <h1 className="text-center mt-5">
           <strong>Upcoming Events</strong>
+          {isLoggedIn === "true" && (
+            <button
+              style={{
+                backgroundColor: '#28a745',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                padding: '8px 16px',
+                cursor: 'pointer',
+                marginLeft:'1000px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                display: 'flex',
+                fontFamily: 'Gotham Bold, sans-serif',
+                padding: '12px 24px',
+                fontSize: '16px',
+              }}
+              onClick={() => navigate('/eventcreate')}
+            >
+              <img
+                src={eventIcon}
+                alt="Event Icon"
+                style={{ marginRight: '8px', height: '20px', width: '20px', filter: 'invert(1)' }}
+              />{' '}
+              <span style={{ marginBottom: '3px' }}>Create Events</span>
+            </button>
+          )}
+  
         </h1>
         <div className="events-container">
-          {/* Display upcoming events */}
-          {upcomingEvents.map((event) => (
+          {events.upcoming.map((event) => (
             <div key={event.id} className="event-box">
-              <img src={event.image} alt={event.title} />
+              <img src={require(`C:/Users/Uday/Desktop/RPA/TESTS/server/public/images/${event.image}`)} alt={event.title} />
               <div className="event-details">
                 <h2>
                   <strong>{event.title}</strong>
@@ -65,10 +101,9 @@ const EventsComponent = () => {
           <strong>Completed Events</strong>
         </h1>
         <div className="events-container">
-          {/* Display completed events */}
-          {completedEvents.map((event) => (
+          {events.completed.map((event) => (
             <div key={event.id} className="event-box completed">
-              <img src={event.image} alt={event.title} />
+              <img src={require(`C:/Users/Uday/Desktop/RPA/TESTS/server/public/images/${event.image}`)} alt={event.title} />
               <div className="event-details">
                 <h2>
                   <strong>{event.title}</strong>

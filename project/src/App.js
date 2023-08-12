@@ -9,6 +9,7 @@ import SignUp from './SignUp';
 import UserDetails from './UserDetails';
 import CreateEventForm from './CreateEventForm';
 import ImageUpload from './imageUpload.';
+import ImageForm from './ImageForm';
 function App() {
   const isLoggedIn = window.localStorage.getItem('loggedIn');
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/userDetails" element={<UserDetails />} />
           <Route path="/image" element={<ImageUpload />} />
+          <Route path="/eventcreate" element={<ImageForm />} />
           <Route path="/CreateEventForm" element={<CreateEventForm />} />
         </Routes>
       </div>
